@@ -1,18 +1,20 @@
-package employee
+package employee_test
 
 import (
 	"testing"
+
+	"github.com/namnd/payslip-cli/pkg/employee"
 )
 
 func TestNewEmployee(t *testing.T) {
 	testCases := []struct {
 		input    string
-		expected *Employee
+		expected *employee.Employee
 		errMsg   string
 	}{
 		{
 			"\"John Doe\" 1000",
-			&Employee{
+			&employee.Employee{
 				Name:         "\"John Doe\"",
 				AnnualSalary: 1000,
 			},
@@ -20,7 +22,7 @@ func TestNewEmployee(t *testing.T) {
 		},
 		{
 			"John 2000",
-			&Employee{
+			&employee.Employee{
 				Name:         "John",
 				AnnualSalary: 2000,
 			},
@@ -28,7 +30,7 @@ func TestNewEmployee(t *testing.T) {
 		},
 		{
 			"John",
-			&Employee{
+			&employee.Employee{
 				Name: "John",
 			},
 			"Invalid format",
@@ -41,7 +43,7 @@ func TestNewEmployee(t *testing.T) {
 	}
 
 	for _, testCase := range testCases {
-		employee, err := NewEmployee(testCase.input)
+		employee, err := employee.NewEmployee(testCase.input)
 		if err != nil {
 			if err.Error() != testCase.errMsg {
 				t.Errorf("Expected error %s, got %s", testCase.errMsg, err.Error())

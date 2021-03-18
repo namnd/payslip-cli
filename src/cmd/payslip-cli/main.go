@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/namnd/payslip-cli/pkg/employee"
 	"github.com/namnd/payslip-cli/pkg/util"
 )
 
@@ -15,5 +16,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(instruction)
+
+	employee, err := employee.NewEmployee(instruction.Params)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	util.ExecuteCommand(employee, instruction.Command)
 }

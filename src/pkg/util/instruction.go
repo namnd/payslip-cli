@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"reflect"
 	"strings"
 )
 
@@ -31,4 +32,9 @@ func NewInstruction(reader io.Reader) (*Instruction, error) {
 	}
 
 	return &instruction, nil
+}
+
+func ExecuteCommand(i interface{}, command string) interface{} {
+	method := reflect.ValueOf(i).MethodByName(command)
+	return method.Call([]reflect.Value{})[0].Interface()
 }
