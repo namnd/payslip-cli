@@ -38,11 +38,8 @@ func TestNewInstruction(t *testing.T) {
 		stdin.Write([]byte(testCase.input))
 
 		instruction, _ := NewInstruction(&stdin)
-		if instruction.Command != testCase.expected.Command {
+		if *instruction != *testCase.expected {
 			t.Errorf("Expected command %v, got command %v", testCase.expected.Command, instruction.Command)
-		}
-		if instruction.Params != testCase.expected.Params {
-			t.Errorf("Expected params %s, got params %s", testCase.expected.Params, instruction.Params)
 		}
 	}
 

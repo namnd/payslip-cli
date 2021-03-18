@@ -24,10 +24,10 @@ func NewInstruction(reader io.Reader) (*Instruction, error) {
 
 	s := strings.SplitN(line, " ", 2)
 	var instruction Instruction
-	instruction.Command = s[0]
+	instruction.Command = strings.TrimSpace(s[0])
 
 	if len(s) > 1 {
-		instruction.Params = s[1]
+		instruction.Params = strings.TrimSpace(s[1])
 	}
 
 	return &instruction, nil
