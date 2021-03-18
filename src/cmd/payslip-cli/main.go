@@ -22,5 +22,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	util.ExecuteCommand(employee, instruction.Command)
+	output := util.ExecuteCommand(employee, instruction.Command)
+	fmt.Println(output)
 }

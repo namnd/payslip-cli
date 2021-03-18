@@ -1,6 +1,7 @@
 package employee_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/namnd/payslip-cli/pkg/employee"
@@ -30,9 +31,7 @@ func TestNewEmployee(t *testing.T) {
 		},
 		{
 			"John",
-			&employee.Employee{
-				Name: "John",
-			},
+			nil,
 			"Invalid format",
 		},
 		{
@@ -52,5 +51,22 @@ func TestNewEmployee(t *testing.T) {
 			t.Errorf("Expected %v, got %v", testCase.expected, employee)
 		}
 	}
+}
 
+func TestGenerateMonthlyPayslip(t *testing.T) {
+	employee := *&employee.Employee{
+		Name:         "\"John Doe\"",
+		AnnualSalary: 60000,
+	}
+	expected := fmt.Sprintf(`
+Monthly Payslip for: %s
+Gross Monthly Income: $%.0f
+Monthly Income Tax: $%.0f
+Net Monthly Income: $%.0f
+`, "\"John Doe\"", 5000.0, 500.0, 4500.0)
+
+	output := employee.GenerateMonthlyPayslip()
+	if output != expected {
+		t.Errorf("Expected ouput:\n%sActual:\n%s", expected, output)
+	}
 }

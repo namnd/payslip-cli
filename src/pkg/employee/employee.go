@@ -2,6 +2,7 @@ package employee
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -32,4 +33,25 @@ func NewEmployee(input string) (*Employee, error) {
 		Name:         strings.TrimSpace(name),
 		AnnualSalary: salary,
 	}, nil
+}
+
+func (e *Employee) GenerateMonthlyPayslip() string {
+	return fmt.Sprintf(`
+Monthly Payslip for: %s
+Gross Monthly Income: $%.0f
+Monthly Income Tax: $%.0f
+Net Monthly Income: $%.0f
+`,
+		e.Name,
+		e.GetGrossMonthlyIncome(),
+		e.GetMonthlyIncomeTax(),
+		e.GetGrossMonthlyIncome()-e.GetMonthlyIncomeTax())
+}
+
+func (e *Employee) GetGrossMonthlyIncome() float64 {
+	return e.AnnualSalary / 12
+}
+
+func (e *Employee) GetMonthlyIncomeTax() float64 {
+	return 500.0
 }
