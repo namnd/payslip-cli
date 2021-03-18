@@ -118,7 +118,7 @@ func TestGetMonthlyIncomeTax(t *testing.T) {
 		},
 		{
 			181000,
-			44000.0 / 12,
+			40400.0 / 12,
 		},
 	}
 
