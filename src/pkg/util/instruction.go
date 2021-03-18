@@ -13,7 +13,7 @@ type Instruction struct {
 }
 
 func NewInstruction(reader io.Reader) (*Instruction, error) {
-	fmt.Println("Enter your input (e.g GenerateMonthlyPayslip \"Mary Song\" 60000")
+	fmt.Println("Enter your input (e.g GenerateMonthlyPayslip \"Mary Song\" 60000)")
 
 	line, err := bufio.NewReader(reader).ReadString('\n')
 	if err != nil {
