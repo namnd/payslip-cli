@@ -53,5 +53,17 @@ func (e *Employee) GetGrossMonthlyIncome() float64 {
 }
 
 func (e *Employee) GetMonthlyIncomeTax() float64 {
-	return 500.0
+	if e.AnnualSalary <= 20000 {
+		return 0
+	}
+	if e.AnnualSalary <= 40000 {
+		return ((e.AnnualSalary - 20000) * 0.1) / 12
+	}
+	if e.AnnualSalary <= 80000 {
+		return ((e.AnnualSalary-40000)*0.2 + 2000) / 12
+	}
+	if e.AnnualSalary <= 180000 {
+		return ((e.AnnualSalary-80000)*0.3 + 10000) / 12
+	}
+	return ((e.AnnualSalary-180000)*0.4 + 40000) / 12
 }
